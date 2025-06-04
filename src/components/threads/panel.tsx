@@ -1,3 +1,13 @@
+import ThreadList from './list';
+import {TextEditor} from '../text-editor/box';
+
 export default function ThreadPanel() {
-  return <div>ChatArea</div>;
+  return (
+    <div className="flex flex-1 flex-col gap-4 px-60 pt-0">
+      <div className="flex flex-1">
+        <ThreadList />
+      </div>
+      <TextEditor />
+    </div>
+  );
 }
