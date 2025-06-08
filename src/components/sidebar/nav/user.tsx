@@ -1,8 +1,6 @@
 'use client';
 
-import {api} from '~/trpc/react';
 import {LogOut, ChevronsUpDown} from 'lucide-react';
-import {useClientUserId} from '~/state/cookie/client';
 import {Avatar, AvatarFallback} from '~/components/ui/avatar';
 import {
   useSidebar,
@@ -21,11 +19,8 @@ import {
 
 export function NavUser() {
   const {isMobile} = useSidebar();
-  const userId = useClientUserId();
-  const [user] = api.user.getUser.useSuspenseQuery({userId});
-  const userName = user.username;
-  const userInitials =
-    `${userName.charAt(0)}${userName.charAt(1)}`.toUpperCase();
+  const userName = 'kindaraffy';
+  const userInitials = `kr`.toUpperCase();
   const userEmail = `${userName}@rmit.edu.au`;
 
   return (

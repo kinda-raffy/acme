@@ -10,20 +10,20 @@ import {
 import {Button} from '../ui/button';
 import {useSendChannelEditor} from './use-send';
 
-export const TextEditor = () => {
+export const ChannelEditor = () => {
   return (
     <div className="bg-muted p-2 pb-0 rounded-t-xl">
       <div className="bg-background border border-b-0 border-border rounded-t-lg p-2">
-        <TextEditorInput />
+        <ChannelEditorInput />
         <div className="flex justify-end">
-          <TextEditorSubmit />
+          <ChannelEditorSubmit />
         </div>
       </div>
     </div>
   );
 };
 
-export const TextEditorInput = () => {
+export const ChannelEditorInput = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const {channelText, setChannelText} = useChannelEditorStore(
     useShallow(state => ({
@@ -56,9 +56,10 @@ export const TextEditorInput = () => {
   );
 };
 
-export const TextEditorSubmit = () => {
+export const ChannelEditorSubmit = () => {
   const isSendButtonActive = useIsSendButtonActive();
-  const {send} = useSendChannelEditor();
+  const isNewThread = window.location.pathname === '/';
+  const {send} = useSendChannelEditor({isNewThread});
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent): void => {

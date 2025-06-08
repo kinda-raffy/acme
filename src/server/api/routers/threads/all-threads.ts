@@ -8,6 +8,7 @@ export const allThreads = publicProcedure
         z.object({
           threadId: z.string(),
           channelId: z.string(),
+          channelName: z.string(),
         })
       ),
     })
@@ -20,6 +21,10 @@ export const allThreads = publicProcedure
     });
 
     return {
-      threads,
+      threads: threads.map(thread => ({
+        threadId: thread.threadId,
+        channelId: thread.channel.channelId,
+        channelName: thread.channel.name,
+      })),
     };
   });

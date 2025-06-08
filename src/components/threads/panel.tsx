@@ -1,5 +1,5 @@
 import {ThreadList} from './list';
-import {TextEditor} from '../channel-editor/box';
+import {ChannelEditor} from '../channel-editor/editor';
 
 export const ThreadPanel = () => {
   return (
@@ -7,7 +7,7 @@ export const ThreadPanel = () => {
       <div className="flex flex-1">
         <ThreadList />
       </div>
-      <TextEditor />
+      <ChannelEditor />
     </div>
   );
 };

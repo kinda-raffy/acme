@@ -66,13 +66,11 @@ export const getThread = publicProcedure
             type: 'user' as const,
             commentId: c.channelUserCommentId,
             text: c.text,
-            authorId: c.userId,
           })),
           ...thread.channel.agentComments.map(c => ({
             type: 'agent' as const,
             commentId: c.channelAgentCommentId,
             text: c.text,
-            authorId: c.agentId,
           })),
         ],
       },

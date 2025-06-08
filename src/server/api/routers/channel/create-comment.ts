@@ -11,7 +11,6 @@ export const createChannelComment = publicProcedure
       type: z.enum(['user', 'agent']),
       channelId: z.string(),
       text: z.string(),
-      authorId: z.string(),
     })
   )
   .mutation(async ({ctx, input}) => {
@@ -19,13 +18,11 @@ export const createChannelComment = publicProcedure
       await ctx.db.insert(ChannelUserComment).values({
         channelId: input.channelId,
         text: input.text,
-        userId: input.authorId,
       });
     } else {
       await ctx.db.insert(ChannelAgentComment).values({
         channelId: input.channelId,
         text: input.text,
-        agentId: input.authorId,
       });
     }
   });
