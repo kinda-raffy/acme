@@ -18,7 +18,7 @@ import {
   SidebarMenuSubButton,
 } from '~/components/ui/sidebar';
 
-export function NavMain({
+export const NavThreads = ({
   items,
 }: {
   items: {
@@ -31,10 +31,10 @@ export function NavMain({
       url: string;
     }[];
   }[];
-}) {
+}) => {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Threads</SidebarGroupLabel>
       <SidebarMenu>
         {items.map(item => (
           <Collapsible
@@ -78,4 +78,4 @@ export function NavMain({
       </SidebarMenu>
     </SidebarGroup>
   );
-}
+};

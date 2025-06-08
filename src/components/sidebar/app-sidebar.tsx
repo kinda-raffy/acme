@@ -1,10 +1,8 @@
 'use client';
 
+import {Suspense} from 'react';
 import type * as React from 'react';
-import {NavMain} from '~/components/nav-main';
-import {NavUser} from '~/components/nav-user';
-import {NavProjects} from '~/components/nav-projects';
-import {NavSecondary} from '~/components/nav-secondary';
+import {NavUser} from '~/components/sidebar/nav/user';
 import {
   Bot,
   Map,
@@ -26,6 +24,8 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from '~/components/ui/sidebar';
+import {NavThreads} from './nav/threads';
+import {NavSecondary} from './nav/secondary';
 
 const data = {
   user: {
@@ -165,8 +165,8 @@ export function AppSidebar({
                   <Command className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-medium">DCNC 25</span>
+                  <span className="truncate text-xs">RMIT University</span>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -174,12 +174,13 @@ export function AppSidebar({
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavThreads items={data.navMain} />
+        <NavSecondary className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <NavUser />
+        </Suspense>
       </SidebarFooter>
     </Sidebar>
   );

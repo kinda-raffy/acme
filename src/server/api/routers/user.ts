@@ -5,6 +5,41 @@ import {User} from '~/server/db/schema/schema';
 import {publicProcedure, createTRPCRouter} from '~/server/api/trpc';
 
 export const userRouter = createTRPCRouter({
+  login: publicProcedure
+    .input(z.object({username: z.string()}))
+    .output(z.object({userId: z.string()}))
+    .mutation(async ({ctx, input}) => {
+      const user = await ctx.db.query.User.findFirst({
+        where: eq(User.username, input.username),
+      });
+
+      if (!user) {
+        const [newUser] = await ctx.db
+          .insert(User)
+          .values({
+            username: input.username,
+          })
+          .returning({
+            userId: User.userId,
+          });
+
+        if (!newUser) {
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Failed to create user',
+          });
+        }
+
+        return {
+          userId: newUser.userId,
+        };
+      }
+
+      return {
+        userId: user.userId,
+      };
+    }),
+
   createUser: publicProcedure
     .input(
       z.object({

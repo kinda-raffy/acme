@@ -6,11 +6,11 @@ export const env = createEnv({
     DATABASE_URL: z.string().url(),
     AWS_COGNITO_USERNAME: z.string(),
     AWS_COGNITO_PASSWORD: z.string(),
-    AWS_COGNITO_CLIENT_ID: z.string(),
-    AWS_COGNITO_CLIENT_SECRET: z.string(),
-    AWS_COGNITO_REGION: z.string(),
+    AWS_REGION: z.string(),
+    AWS_BEDROCK_MODEL_ID: z.string(),
+    AWS_COGNITO_IDENTITY_POOL_ID: z.string(),
     AWS_COGNITO_USER_POOL_ID: z.string(),
-    AWS_COGNITO_USER_POOL_CLIENT_ID: z.string(),
+    AWS_APP_CLIENT_ID: z.string(),
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),
@@ -27,12 +27,11 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     AWS_COGNITO_USERNAME: process.env.AWS_COGNITO_USERNAME,
     AWS_COGNITO_PASSWORD: process.env.AWS_COGNITO_PASSWORD,
-    AWS_COGNITO_CLIENT_ID: process.env.AWS_COGNITO_CLIENT_ID,
-    AWS_COGNITO_CLIENT_SECRET: process.env.AWS_COGNITO_CLIENT_SECRET,
-    AWS_COGNITO_REGION: process.env.AWS_COGNITO_REGION,
+    AWS_REGION: process.env.AWS_REGION,
+    AWS_BEDROCK_MODEL_ID: process.env.AWS_BEDROCK_MODEL_ID,
+    AWS_COGNITO_IDENTITY_POOL_ID: process.env.AWS_COGNITO_IDENTITY_POOL_ID,
     AWS_COGNITO_USER_POOL_ID: process.env.AWS_COGNITO_USER_POOL_ID,
-    AWS_COGNITO_USER_POOL_CLIENT_ID:
-      process.env.AWS_COGNITO_USER_POOL_CLIENT_ID,
+    AWS_APP_CLIENT_ID: process.env.AWS_APP_CLIENT_ID,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
 

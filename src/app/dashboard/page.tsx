@@ -1,6 +1,6 @@
-import {AppSidebar} from '~/components/app-sidebar';
 import {Separator} from '~/components/ui/separator';
-import ThreadPanel from '~/components/threads/panel';
+import {ThreadPanel} from '~/components/threads/panel';
+import {AppSidebar} from '~/components/sidebar/app-sidebar';
 import {
   SidebarInset,
   SidebarTrigger,
