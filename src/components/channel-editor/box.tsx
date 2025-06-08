@@ -1,6 +1,6 @@
 'use client';
 
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, useCallback} from 'react';
 import {ArrowUp} from 'lucide-react';
 import {useShallow} from 'zustand/react/shallow';
 import {
@@ -60,19 +60,22 @@ export const TextEditorSubmit = () => {
   const isSendButtonActive = useIsSendButtonActive();
   const {send} = useSendChannelEditor();
 
-  const handleKeyDown = (event: KeyboardEvent): void => {
-    if (event.key === 'Enter' && !event.shiftKey && isSendButtonActive) {
-      event.preventDefault();
-      send();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent): void => {
+      if (event.key === 'Enter' && !event.shiftKey && isSendButtonActive) {
+        event.preventDefault();
+        void send();
+      }
+    },
+    [isSendButtonActive, send]
+  );
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isSendButtonActive, send]);
+  }, [handleKeyDown, isSendButtonActive, send]);
 
   return (
     <Button

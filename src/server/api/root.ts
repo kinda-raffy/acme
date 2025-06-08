@@ -1,10 +1,10 @@
-import {threadRouter} from '~/server/api/routers/thread';
 import {createTRPCRouter, createCallerFactory} from '~/server/api/trpc';
-import {channelRouter} from './routers/channel';
 import {userRouter} from './routers/user';
+import {channelRouter} from './routers/channel/_route';
+import {threadsRouter} from './routers/threads/_route';
 
 export const appRouter = createTRPCRouter({
-  thread: threadRouter,
+  threads: threadsRouter,
   channel: channelRouter,
   user: userRouter,
 });
