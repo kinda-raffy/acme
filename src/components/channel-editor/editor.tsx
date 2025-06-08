@@ -2,6 +2,7 @@
 
 import {useRef, useEffect, useCallback} from 'react';
 import {ArrowUp} from 'lucide-react';
+import {usePathname} from 'next/navigation';
 import {useShallow} from 'zustand/react/shallow';
 import {
   useChannelEditorStore,
@@ -58,17 +59,22 @@ export const ChannelEditorInput = () => {
 
 export const ChannelEditorSubmit = () => {
   const isSendButtonActive = useIsSendButtonActive();
-  const isNewThread = window.location.pathname === '/';
-  const {send} = useSendChannelEditor({isNewThread});
+  const pathname = usePathname();
+  const isNewThread = pathname === '/';
+
+  const type = isNewThread ? 'new-thread' : 'existing-thread';
+  const threadId = isNewThread ? '' : (pathname.split('/')[2] ?? '');
+
+  const {sendFn} = useSendChannelEditor({type, threadId});
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent): void => {
       if (event.key === 'Enter' && !event.shiftKey && isSendButtonActive) {
         event.preventDefault();
-        void send();
+        void sendFn();
       }
     },
-    [isSendButtonActive, send]
+    [isSendButtonActive, sendFn]
   );
 
   useEffect(() => {
@@ -76,7 +82,7 @@ export const ChannelEditorSubmit = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDown, isSendButtonActive, send]);
+  }, [handleKeyDown, sendFn, isSendButtonActive]);
 
   return (
     <Button
@@ -84,7 +90,7 @@ export const ChannelEditorSubmit = () => {
       size="icon"
       className="size-9"
       disabled={!isSendButtonActive}
-      onClick={send}
+      onClick={sendFn}
     >
       <ArrowUp size={20} />
     </Button>

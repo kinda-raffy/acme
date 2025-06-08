@@ -20,13 +20,11 @@ export const getThread = publicProcedure
               type: z.literal('user'),
               commentId: z.string(),
               text: z.string(),
-              authorId: z.string(),
             }),
             z.object({
               type: z.literal('agent'),
               commentId: z.string(),
               text: z.string(),
-              authorId: z.string(),
             }),
           ])
         ),

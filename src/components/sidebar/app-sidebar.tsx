@@ -30,7 +30,9 @@ export const AppSidebar = ({
                   <Command className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">DCNC 25</span>
+                  <span className="truncate font-medium">
+                    {"DCNC '25"}
+                  </span>
                   <span className="truncate text-xs">RMIT University</span>
                 </div>
               </a>
@@ -43,7 +45,7 @@ export const AppSidebar = ({
         <NavSecondary className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={null}>
           <NavUser />
         </Suspense>
       </SidebarFooter>
