@@ -65,7 +65,10 @@ export const ChannelEditorSubmit = () => {
   const type = isNewThread ? 'new-thread' : 'existing-thread';
   const threadId = isNewThread ? '' : (pathname.split('/')[2] ?? '');
 
-  const {sendFn} = useSendChannelEditor({type, threadId});
+  const {sendFn} = useSendChannelEditor({
+    type,
+    threadId,
+  });
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent): void => {

@@ -14,8 +14,9 @@ type SendChannelEditorProps =
 
 export const useSendChannelEditor = (c: SendChannelEditorProps) => {
   const queryClient = useQueryClient();
-  const mutateThread = api.threads.createThread.useMutation();
-  const mutateComment = api.channel.createChannelComment.useMutation();
+  const mutateThreadFirstComment =
+    api.threads.createThreadFirstComment.useMutation();
+
   const {channelText, clearChannelText} = useChannelEditorStore(
     useShallow(state => ({
       channelText: state.channelText,
@@ -25,13 +26,11 @@ export const useSendChannelEditor = (c: SendChannelEditorProps) => {
 
   const sendFn = async () => {
     if (c.type === 'new-thread') {
-      const {threadId, channelId} = await mutateThread.mutateAsync();
-      window.location.href = `/thread/${threadId}`;
-      await mutateComment.mutateAsync({
-        type: 'user',
-        channelId,
+      console.log('new thread: ', channelText);
+      const {threadId} = await mutateThreadFirstComment.mutateAsync({
         text: channelText,
       });
+      window.location.href = `/thread/${threadId}`;
     } else {
     }
     await queryClient.invalidateQueries({

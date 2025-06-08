@@ -20,6 +20,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.826.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.826.0",
+    "@aws-sdk/credential-providers": "^3.826.0",
     "@libsql/client": "^0.14.0",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-collapsible": "^1.1.11",
