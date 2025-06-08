@@ -1,16 +1,16 @@
 import {createTRPCRouter} from '~/server/api/trpc';
 import {getThread} from './get-thread';
 import {allThreads} from './all-threads';
-import {invokeAgent} from './invoke-agent';
 import {createThread} from './create-thread';
+import {invokeThreadAgent} from './invoke-agent';
 import {createThreadTitle} from './thread-title';
-import {createThreadFirstComment} from './first-comment';
+import {createThreadComment} from './create-comment';
 
 export const threadsRouter = createTRPCRouter({
   getThread: getThread,
   allThreads: allThreads,
   createThread: createThread,
-  invokeAgent: invokeAgent,
+  invokeThreadAgent: invokeThreadAgent,
   createThreadTitle: createThreadTitle,
-  createThreadFirstComment: createThreadFirstComment,
+  createThreadComment: createThreadComment,
 });

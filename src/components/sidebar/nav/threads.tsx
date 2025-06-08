@@ -2,12 +2,13 @@
 
 import {api} from '~/trpc/react';
 import {uuidSortBy} from '~/lib/uuidv7';
-import {MessageCircle} from 'lucide-react';
+import {Plus, MessageCircle} from 'lucide-react';
 import {useActiveThreadId} from '~/state/session';
 import {
   SidebarMenu,
   SidebarGroup,
   SidebarMenuItem,
+  SidebarSeparator,
   SidebarGroupLabel,
   SidebarMenuButton,
 } from '~/components/ui/sidebar';
@@ -30,6 +31,15 @@ export const NavThreads = () => {
     <SidebarGroup>
       <SidebarGroupLabel>Threads</SidebarGroupLabel>
       <SidebarMenu>
+        <SidebarMenuItem key={'new-thread'}>
+          <SidebarMenuButton asChild tooltip={'New Thread'}>
+            <a href={'/'}>
+              <Plus />
+              <span>New Chat</span>
+            </a>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+        <SidebarSeparator />
         {items.map((item, index) => (
           <SidebarMenuItem key={index}>
             <SidebarMenuButton

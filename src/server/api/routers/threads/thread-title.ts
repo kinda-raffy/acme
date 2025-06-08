@@ -56,7 +56,9 @@ const generateTitle = async (text: string): Promise<string> => {
     if (!response?.output?.message?.content?.[0]?.text) {
       throw new Error('No response text from Bedrock');
     }
-    return response.output.message.content[0].text.trim().replace('"', '');
+    return response.output.message.content[0].text
+      .trim()
+      .replace(/"/g, '');
   } catch (error) {
     console.error('Error generating title:', error);
     return text.slice(0, 50); // Fallback to first 50 chars of input text.

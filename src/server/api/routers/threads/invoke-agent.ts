@@ -20,7 +20,7 @@ type ChannelCommentFeed = Array<{
   content: string;
 }>;
 
-export const invokeAgent = publicProcedure
+export const invokeThreadAgent = publicProcedure
   .input(z.object({threadId: z.string()}))
   .subscription(async function* ({ctx, input: {threadId}}) {
     const thread = await ctx.db.query.Thread.findFirst({
